@@ -1,0 +1,349 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@1,500&family=Cormorant+Garamond:ital,wght@1,300&family=Vujahday+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2? family=Staatliches&');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+* , ::after , ::before{
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+:root{
+
+    font-size: 62.5%;
+    --transition: all 0.5s ease;
+}
+
+body{
+    background: url("img/toppng.com-dice-365x399.png");
+    background-repeat: no-repeat;
+    background-position:top;
+    position: relative;
+   
+}
+
+.how{
+
+    float:right;
+    margin: 2rem;
+    clear: left;
+
+
+}
+
+.how button{
+    background: transparent;
+    outline: none;
+    border: none;
+    margin-right: 5rem;
+    cursor: pointer;
+    font-size: 3rem;
+    color: green;
+    font-family: 'Caveat', cursive;
+    font-weight: bolder;
+
+}
+.playGame{
+
+    float:left;
+    margin: 2rem;
+
+
+}
+.playGame button{
+    background: transparent;
+    outline: none;
+    border: none;
+    margin-right: 5rem;
+    cursor: pointer;
+    font-size: 3rem;
+    color: green;
+    font-family: 'Caveat', cursive;
+    font-weight: bolder;
+
+}
+
+.playGame a{
+    color: green;
+    text-decoration: none;
+}
+.usersOnline{
+    background-image: linear-gradient( 135deg, #FD6585 10%, #0D25B9 100%);
+border-radius: 5px;
+   width: 20%;
+   padding:3rem;
+   padding-top:0 ;
+   margin:5rem;
+   height: 0.4rem;
+   overflow: hidden;
+   transition: var(--transition);
+  
+}
+
+
+.usersOnline h4{
+
+    font-size: 1.6rem;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.4rem;
+}
+
+
+
+.usersOnline ul{
+    border-radius: 5px;
+    transition: all .4s linear;
+}
+
+.usersOnline li{
+    
+    font-size:  1.5rem;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+    text-align:  center;
+    list-style: none;
+    padding: 0.5rem;
+    transition: all .3s ease-in;
+    list-style: radial-gradient(circle , lightgreen ,lightgreen);
+}
+
+.usersOnline li:hover{
+    background-color:orangered;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+.invitations h3{
+
+    font-size: 1.6rem;
+z-index: 100;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+  position: relative;
+    width: inherit;
+    padding: 1rem;
+    padding-top:0.5rem ;
+    cursor: pointer;
+    border-bottom: 3px solid white;
+}
+
+
+
+.invitations ul{
+    border-radius: 5px;
+    transition: all .4s linear;
+
+
+}
+
+.invitations li{
+    width: inherit;
+    font-size:  1.5rem;
+    font-family:Arial, Helvetica, sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+    text-align:  center;
+    list-style: none;
+    padding: 1rem;
+    transition: var(--transition);
+
+}
+.invitations button{
+
+    padding: 1rem;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 5px;
+border: none;
+     transition: var(--transition);
+}
+
+.invitations button:nth-child(odd){
+    background-color: black;
+}
+.invitations button:nth-child(even){
+    background-color: green;
+}
+
+.invitations button:active{
+
+    position: relative;
+    top: 2px;
+}
+
+.index{
+    z-index:100;
+    width:1%;
+    height: 5%;
+
+    text-align: center;
+   
+    background: green;
+    padding:.7rem;
+    border-radius:50px;
+    position: absolute;
+    transform: translate(280%,50%);
+    left: 129rem;
+    bottom: -57rem;
+   
+}
+.drop{
+    
+    color: black;
+    background: transparent;
+    outline: none;
+    border: none;
+    
+}
+
+.hidden{
+    display: none;
+}
+.overlay{
+
+    width: 100%;
+    position: fixed;
+
+    height: 100%;
+
+backdrop-filter:unset;
+top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  transition: all 0.5s;
+
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100rem;
+    background-color: #fff;
+    padding: 5rem 6rem;
+    box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: all 0.5s;
+    border-radius: 5px;
+    font-size: 2rem;
+    overflow-y:scroll ;
+    height: 80%;
+    background:whitesmoke;
+    transition: all .2s ease-in;
+}
+
+.modal h1{
+
+    text-align: center;
+    font-size: 4rem;
+    letter-spacing:0.5rem;
+    word-spacing: 0.6rem;
+    text-transform:uppercase;
+    background-image: linear-gradient( 135deg, #FFF720 10%, #3CD500 100%);
+    padding:2rem;
+    color:orangered;
+
+
+}
+
+.modal p{
+    
+    padding:1rem;
+    font-family: 'Cabin', sans-serif;
+    letter-spacing: 0.05rem;
+    word-spacing: 0.05rem;
+
+
+
+}
+
+.modal p::before{
+    content: "ques:";
+    color: rgb(163, 160, 155);
+    font-size: 1.3rem;
+
+}
+
+.modal p:nth-child(even){ 
+    font-family: 'Vujahday Script', cursive;
+}
+/* .modal p: */
+
+.modal p:nth-child(odd)::before{
+    content: "Ans:";
+    color: rgb(163, 160, 155);
+    font-size: 1.3rem;
+
+}
+
+.modal h3{
+
+    padding: 2rem ;
+
+}
+
+.modal li{
+    list-style: linear-gradient( 135deg, #F5CBFF 10%, #C346C2 100%);
+padding: 0.6rem;
+font-family: 'Cormorant Garamond', serif;
+font-size: 2.3rem;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 0.5rem;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1fa;
+    border-radius: 0.2rem;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(95, 95, 95);
+    border-radius: 0.5rem;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(90, 89, 89);
+  }
+
+  .logo {
+
+    width: 80%;
+    
+    /* margin: 0 auto;
+  
+    margin-left: 10%; */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    max-width: 70rem;
+   font-size: 10rem; 
+   font-weight: bolder;
+   font-family: 'Staatliches', cursive;
+   letter-spacing: 2rem;
+   word-spacing: 1rem;
+   
+       border-radius: 5px;
+       color:orangered;
+  }
