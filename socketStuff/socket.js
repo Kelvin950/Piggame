@@ -23,7 +23,7 @@ io.on("connection" , socket=>{
   io.emit("userSconnected" , {
 
     names:names,
-    players:players,
+    players:players || [],
     usersOline:numOfSocketsConnected
   });
 
@@ -206,6 +206,23 @@ socket.on("hold" , data=>{
 
 });
 
+socket.on("messageSent"  , (data ,cb)=>{
+   const player = players.find(p=>p.name === username);
+   // console.log(player ,"player");
+   
+   if(!player){
+      return cb("You are not in a game");
+   }
+
+   if(player){
+      if(!InARoom(player)){
+   
+         return cb("You are not in a game");
+      }
+   }
+    io.to(data.room).emit("message" , {from:data.from , message:data.message})
+
+})
   
 socket.on("disconnect" , ()=>{
 

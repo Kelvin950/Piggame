@@ -263,3 +263,29 @@ socket.on("playerLeft" , (data)=>{
 socket.on("NotInARoom" , data=>{
     console.log(data);
 })
+
+
+form.addEventListener("submit" ,e=>{
+
+    e.preventDefault();
+const message = document.querySelector("input").value ; 
+if(message === ""){
+    return; 
+}
+console.log(message);
+ socket.emit("messageSent" , {
+     from:username ,
+     message:message,
+     room:player.room
+ } , (error)=>{
+    // message=  "";
+    return markUp(error);
+ })
+ document.querySelector("input").value = "";
+})
+
+socket.on("message" ,data=>{
+    console.log(data);
+const messages  =  `<li><p>${data.from}: ${data.message}</p></li>`;
+chatUl.innerHTML +=messages;
+})
