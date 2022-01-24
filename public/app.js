@@ -101,6 +101,7 @@ document.querySelector(".decline").addEventListener("click" ,e=>{
     notification.innerHTML =  "";
     notification.style.top =  '-15%';
 
+    socket.emit("declined" , {id:data.from.id ,sender:data.from.sender})
     })
 
 // })
@@ -124,7 +125,12 @@ notification.innerHTML =  "";
 //         console.log(e.target);
 //        }
     
-   
+   socket.on("declined" , (data)=>{
+       console.log(data);
+
+       return markUp(data);
+
+   })
 
 //     // e.target.parentElement.classList.add("hidden");
 
@@ -258,6 +264,7 @@ socket.on("drawGame" , data=>{
 
 socket.on("playerLeft" , (data)=>{
     console.log(data ,'playerleft');
+  showModal(data.data)
 });
 
 socket.on("NotInARoom" , data=>{

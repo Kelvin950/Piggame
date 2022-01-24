@@ -1,4 +1,6 @@
 const toggleBtn = document.querySelector(".sidebar-toggle");
+const modal1 = document.querySelector(".modal1");
+const overlay =  document.querySelector(".overlay");
 const closeBtn = document.querySelector(".close-btn");
 const sidebar = document.querySelector(".sidebar");
 const ul = document.querySelector(".links");

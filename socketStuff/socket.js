@@ -136,6 +136,21 @@ io.emit("playerDetails" , {
 
 });
 
+socket.on("declined" , (data)=>{
+   const player =  players.find(player=>player.getName() === data.sender)
+      
+   if(!player)return ;
+   socket.to(player.room).emit("declined" ,  `${username} declined your invitation`);
+
+   // if(player.gameStarted){
+        const index =  players.findIndex(p=>p.name ===player.name);
+      players.splice(index,1);
+   
+      leaveRoom(player.room ,data.sender);
+
+   
+})
+
 socket.on("joinedGame" ,({room})=>{
    console.log(room);
   const isPlayerInRoom = playersInRoom(room).find(player=>player.getName()===username);
@@ -231,14 +246,14 @@ socket.on("disconnect" , ()=>{
    
     if(!player)return;
    // if(player.gameStarted){
-        const index =  players.find(p=>p.name ===player.name);
+        const index =  players.findIndex(p=>p.name ===player.name);
       players.splice(index,1);
           console.log(player,13);
       leaveRoom(player.room ,username);
 
       console.log(players ,1221);
       
-      io.to(player.room).emit("playerLeft" , {player:player});
+      io.to(player.room).emit("playerLeft" , {player:player , data:`${username} disconnected`});
    // }
         
    removeClientFromMap(socket.id , username , userSocketIdMap);
@@ -252,7 +267,8 @@ socket.on("disconnect" , ()=>{
    io.emit("userSconnected" , {
 
       names:names,
-      usersOline:numOfSocketsConnected
+      usersOline:numOfSocketsConnected,
+      players:players|| [],
     });
   
 })

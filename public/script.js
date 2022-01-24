@@ -26,7 +26,7 @@ if(!username){
     username =  generate(5);
 localStorage.setItem("username" ,username);
 }
-
+document.querySelector(".sidebar-header").innerHTML =  `<h1>${username}</h1>`
 console.log(username);
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
@@ -74,9 +74,18 @@ const switchPlayer = function () {
               notification.style.top =  '3%';
                setTimeout(()=>{
                 notification.style.top =  '-15%';
-               } , 5000)
+               } , 3000)
   }
+function showModal(html){
 
+  const markUp =  `<p>${html} Leave room as well</p><button class="btn btn-secondary reload">Okay</button>`
+  modal1.insertAdjacentHTML("afterbegin" , markUp);
+  modal1.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+document.querySelector(".reload").addEventListener("click" , ()=>{
+  location.reload();
+})
+}
   function draw(Mainplayers ){
     players  = Mainplayers;
 
@@ -85,5 +94,6 @@ const switchPlayer = function () {
     document.querySelector("main").insertAdjacentHTML("afterbegin" , setMain(players , player ));
     document.querySelector(".btne--roll").addEventListener("click" ,click);
     document.querySelector(".btne--hold").addEventListener("click",Hold);
+    sidebar.classList.remove("show-sidebar");
 //  console.log(players);
   }
