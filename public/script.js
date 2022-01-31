@@ -70,7 +70,7 @@ const switchPlayer = function () {
     }).join(" ")}
 
    
-    <button class="btne btne--new" >🔄 New game</button>
+
 
      <button class="btne btne--roll"  ${(player.currentPlayer)?"": "disabled" } >🎲 Roll dice</button>
        
@@ -139,12 +139,14 @@ function showEnd(src , state , cb){
 
   overlay.classList.remove('hidden');
 
-  document.getElementById("btn").addEventListener('click',()=>{
-cb();
-modal1.classList.add('hidden');
-overlay.classList.add('hidden');
-
-  })
+  if(state=== "You won"){
+    document.getElementById("btn").addEventListener('click',()=>{
+      cb();
+      modal1.classList.add('hidden');
+      overlay.classList.add('hidden');
+      
+        })
+  }
 document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`;
 }
   function draw(Mainplayers ){
@@ -173,4 +175,15 @@ document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memo
     modal1.classList.add('hidden');
     overlay.classList.add('hidden');
 //  console.log(players);
+  }
+
+
+  function sound(sRc){
+
+  
+    const v= document.createElement("audio");
+    v.src =sRc;
+    v.play().catch(err=>console.log(1));
+  
+
   }

@@ -5,7 +5,8 @@
 
 const socket= io({
     query:{
-        username:username
+        username:username,
+    
     }
 });
 let userID ;
@@ -35,6 +36,7 @@ socket.on("userSconnected" ,data=>{
 ul.innerHTML =  ""
      const html =  names.map(name =>{
          return `    <li >
+         
          <p class="li">${name}</p>
          <span> Online</span> ${data.players.find(p=>p.name===name)?`<span> <i class="fas fa-dice-five"></i> In a game</span>` : ""} 
        </li>`
@@ -83,6 +85,8 @@ ul.innerHTML =  ""
 
 
 socket.on("invitation" ,data=>{
+   
+  
     console.log(data);
 
     const html = `<div><p>${data.from.sender} : ${data.message}</p> <button class="btn btn-primary accept">Accept</button> <button class="btn btn-danger decline">Cancel</button></div>`;
@@ -116,8 +120,7 @@ notification.innerHTML =  "";
     socket.emit("joined" , {id:data.from.id ,sender:data.from.sender})
     })
 
-
-  
+    sound('./sounds/mixkit-software-interface-start-2574.wav');
 })
 // invitationUl.addEventListener("click" , (e)=>{
 //     if(e.target.classList.contains(`${data.from.sender}`)){
@@ -175,18 +178,22 @@ socket.on("hello" , data=>{
 
 
 function click(e){
+   
     console.log(e.target);
      console.log(player);
         socket.emit("roll" ,{
             player:player ,
             room: player.room}
-        )
-    
+       , ()=>{
+        sound("./sounds/0004526.mp3");
+       } )
+       
        
     
     }
 
     function Hold(e){
+        
         console.log(e.target);
         console.log(player);
         socket.emit("hold" , {
@@ -197,10 +204,12 @@ function click(e){
 
 
     socket.on("hold" , data=>{
+        
         console.log(data);
         player =  data.players.find(player=>player.name === username);
         console.log(player);
         // console.log(data.username);
+       
         draw(data.players);
     })
 
@@ -210,7 +219,7 @@ socket.on("roll" , data=>{
     console.log(data);
     // console.log(UserScore);
    
-document.querySelector("img").src=  `img/${data.diceSrc}`
+document.querySelector(".dice").src=  `img/${data.diceSrc}`
 document.getElementById(`current--${players.findIndex(player=>player.currentPlayer === true)}`).textContent =  data.score;
     //   document.querySelector(`#current--${players.findIndex(player=>player.currentPlayer === true)}`).textContent =  data.score  
     //   console.log(diceEl);  
@@ -295,13 +304,14 @@ socket.on("message" ,data=>{
     console.log(data);
 const messages  =  `<li><p>${data.from}: ${data.message}</p></li>`;
 chatUl.innerHTML +=messages;
+sound('./sounds/mixkit-message-pop-alert-2354.mp3');
 })
 
 socket.on("playerWon" ,(data)=>{
     console.log(data);
     const player =  data.players.find(p=>p.name === username);
     console.log(player);
-   if(player.score >=10){
+   if(player.score >=100){
        const index = memoji.indexOf('0');
        let str = memoji.substr(index ,4);
         str=  +str + 1;
@@ -312,6 +322,7 @@ socket.on("playerWon" ,(data)=>{
                 name:username
               })
           })
+          sound('./sounds/mixkit-male-voice-cheer-2010.wav')
        console.log("You won");
    }
    else{
@@ -321,8 +332,10 @@ socket.on("playerWon" ,(data)=>{
      showEnd(`img/IMG_0${str}.PNG` , "You lost" , ()=>{
         console.log(str);
     })
+    sound('./sounds/mixkit-quick-win-video-game-notification-269.wav')
        console.log("player lost");
    }
+   
     console.log("ddff");
 })
 

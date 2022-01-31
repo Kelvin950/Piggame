@@ -5,7 +5,7 @@ const Player=  require("./Player")
 exports.addClientToMap =  (socketid , username , userSocketIdMap)=>{
 
     if(!userSocketIdMap.has(username)){
-            userSocketIdMap.set(username , new Set([socketid]));
+            userSocketIdMap.set(username , new Set([socketid ]));
     }
     else{
         userSocketIdMap.get(username).add(socketid)
@@ -52,7 +52,7 @@ exports.hold =  (players,cb)=>{
    
     currentPlayer.setScore();
       currentPlayer.SetcurrentScore();
-   if(currentPlayer.getScore() >= 10){
+   if(currentPlayer.getScore() >= 100){
         cb();
         return "won";
     }

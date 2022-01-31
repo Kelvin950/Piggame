@@ -362,7 +362,7 @@ main {
 
 .invitations{
   background:rgba(0, 0, 0, 0.8);
-  color: #000;
+  color: #fff;
   border-radius: 5px;
      width: 20%;
      /* padding:3rem; */
@@ -374,7 +374,7 @@ main {
    box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   overflow: hidden;
      transition: var(--transition);
-     z-index: 2000;
+     z-index: 20000;
 }
 
 .invitations h3{

@@ -171,9 +171,11 @@ socket.on("joinedGame" ,({room})=>{
 } )
 
 
-socket.on("roll" , (data)=>{
- const {player} =  data;
-   const {room} =  data
+socket.on("roll" , (data,cb)=>{
+   cb()
+ const {player,room} =  data;
+   
+ 
    console.log(room);
  
    const playersIntheRoom=  playersInRoom(room)
@@ -241,11 +243,11 @@ socket.on("messageSent"  , (data ,cb)=>{
       return cb("You are not in a game");
    }
 
-   if(player){
-      if(!InARoom(player)){
+   if(player && !InARoom(player)){
+      
    
          return cb("You are not in a game");
-      }
+      
    }
     io.to(data.room).emit("message" , {from:data.from , message:data.message})
 
