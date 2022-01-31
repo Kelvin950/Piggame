@@ -44,15 +44,18 @@ console.log(players);
 }
 
 
-exports.hold =  (players)=>{
+exports.hold =  (players,cb)=>{
 
     let currentPlayer  = players.find(player => player.currentPlayer === true) ; 
     console.log(currentPlayer);
     let  otherPlayer =  players.find(player => player.currentPlayer !== true);
-    
+   
     currentPlayer.setScore();
       currentPlayer.SetcurrentScore();
-  
+   if(currentPlayer.getScore() >= 10){
+        cb();
+        return "won";
+    }
       currentPlayer.currentPlayer =  false ; 
          otherPlayer.currentPlayer =  true;
 console.log(players);

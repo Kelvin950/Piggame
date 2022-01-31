@@ -172,8 +172,7 @@ socket.on("joinedGame" ,({room})=>{
 
 
 socket.on("roll" , (data)=>{
- 
-   const {player} =  data;
+ const {player} =  data;
    const {room} =  data
    console.log(room);
  
@@ -181,13 +180,22 @@ socket.on("roll" , (data)=>{
    playersIntheRoom.forEach(player=>{
       player.gameStarted= true;
    })
+   let gPlayer =  playersIntheRoom.find(player1=>player1.getName()===player.name);
+   // if(gPlayer.getScore() >= 10){
+   //    io.to(room).emit("playerWon" , {
+   //       players: playersIntheRoom,
+   //       // currentPlayer: players.find(player=>player.name === username),
+   
+   //    })
+   //       console.log(gPlayer.getScore(),"platerer");
+   //   }
    console.log(playersIntheRoom);
    console.log(player);
     newDice.generateRandomNumber();
     let dice =  newDice.getDice();
      newDice.setSrc();
      let diceSrc =  newDice.getSrc();
-        let gPlayer =  playersIntheRoom.find(player1=>player1.getName()===player.name);
+       
         gPlayer.currentScore += dice;
         console.log(gPlayer ,1);
         console.log(dice);
@@ -202,7 +210,7 @@ socket.on("roll" , (data)=>{
                username:username
             })
           }
-
+          
    io.to(room).emit("roll" , {
       diceSrc:diceSrc , score: gPlayer.currentScore
    });
@@ -213,8 +221,12 @@ socket.on("roll" , (data)=>{
   
 
 socket.on("hold" , data=>{
+ 
         
-   hold(playersInRoom(data.room)) ;
+   hold(playersInRoom(data.room) , ()=>{
+      io.to(data.room).emit("playerWon" , {
+         players:playersInRoom(data.room),
+   })}) ;
    io.to(data.room).emit("hold" , {
       players:playersInRoom(data.room),
    });
@@ -238,7 +250,20 @@ socket.on("messageSent"  , (data ,cb)=>{
     io.to(data.room).emit("message" , {from:data.from , message:data.message})
 
 })
-  
+  socket.on("newGame" ,(data)=>{
+   
+          for(const p of   playersInRoom(data.room)){
+             if(p.name === data.name){
+                p.setNewGame(data.room , true)
+             }else{
+
+               p.setNewGame(data.room , false)
+             }
+          }
+          io.to(data.room).emit("newGame" , {
+            players:playersInRoom(data.room)
+      });
+  })
 socket.on("disconnect" , ()=>{
 
    console.log(players , 1);

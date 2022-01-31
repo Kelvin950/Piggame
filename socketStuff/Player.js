@@ -12,6 +12,15 @@ class Player{
         this.room = "";
     }
 
+    setNewGame(room , current){
+        this.score =  0;
+        this.currentScore =  0;
+        this.id =  "";
+        this.currentPlayer =current;
+        this.inARoom = true;
+        this.room = room;
+    }
+
     SetcurrentScore(){
         this.currentScore= 0 ;
     }

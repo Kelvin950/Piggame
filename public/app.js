@@ -296,3 +296,40 @@ socket.on("message" ,data=>{
 const messages  =  `<li><p>${data.from}: ${data.message}</p></li>`;
 chatUl.innerHTML +=messages;
 })
+
+socket.on("playerWon" ,(data)=>{
+    console.log(data);
+    const player =  data.players.find(p=>p.name === username);
+    console.log(player);
+   if(player.score >=10){
+       const index = memoji.indexOf('0');
+       let str = memoji.substr(index ,4);
+        str=  +str + 1;
+          showEnd(`img/IMG_0${str}.PNG` , "You won" , ()=>{
+              console.log(str);
+              socket.emit("newGame" , {
+                room:player.room,
+                name:username
+              })
+          })
+       console.log("You won");
+   }
+   else{
+    const index = memoji.indexOf('0');
+    let str = memoji.substr(index ,4);
+     str=  +str + 2;
+     showEnd(`img/IMG_0${str}.PNG` , "You lost" , ()=>{
+        console.log(str);
+    })
+       console.log("player lost");
+   }
+    console.log("ddff");
+})
+
+socket.on("newGame" , data=>{
+    console.log(data);
+    players = data.players;
+          console.log(player);
+    newGame(players)
+    console.log(players);
+})

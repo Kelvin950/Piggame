@@ -20,13 +20,25 @@ return  results
 
 let scores = 0 ;
 let username = localStorage.getItem("username");  
+let memoji = localStorage.getItem("memoji");
 
 if(!username){
     
     username =  generate(5);
+
+
 localStorage.setItem("username" ,username);
 }
-document.querySelector(".sidebar-header").innerHTML =  `<h1>${username}</h1>`
+
+if(!memoji){
+    showMemoji();
+  
+  
+}
+if(memoji){
+  document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`
+}
+
 console.log(username);
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
@@ -78,13 +90,62 @@ const switchPlayer = function () {
   }
 function showModal(html){
 
-  const markUp =  `<p>${html} Leave room as well</p><button class="btn btn-secondary reload">Okay</button>`
+  const markUp =  `<p>${html} Leave room as well</p><button class="btn btn-secondary reload">Okay</button>`;
+  modal1.innerHTML= '';
   modal1.insertAdjacentHTML("afterbegin" , markUp);
   modal1.classList.remove('hidden');
   overlay.classList.remove('hidden');
 document.querySelector(".reload").addEventListener("click" , ()=>{
   location.reload();
 })
+}
+
+function showMemoji(){
+  const markUp =  `<img src="img/IMG_0536.PNG" class="memoji"  width="100px"/>
+  <img src="img/IMG_0539.PNG"  class="memoji" width="100px"/>
+  <img src="img/IMG_0543.PNG"   class="memoji" width="100px"/>
+  <img src="img/IMG_0546.PNG"  class="memoji" width="100px"/>
+  <img src="img/IMG_0549.PNG"  class="memoji" width="100px"/>`;
+  modal1.innerHTML= '';
+  modal1.insertAdjacentHTML("afterbegin" , markUp);
+  modal1.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+
+  document.querySelectorAll("img").forEach(img=>{
+    img.addEventListener("click" , ()=>{
+       const index =  img.src.indexOf('I');
+      memoji =  img.src.substr(index);
+      modal1.classList.add('hidden');
+      overlay.classList.add('hidden');
+      console.log(2);
+     localStorage.setItem("memoji" ,memoji);
+     
+document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`;
+    })
+  })
+
+}
+function showEnd(src , state , cb){
+
+  const markUp = `<div>
+ ${state === "You won" ? ` <button id="btn" class="btne btne--new">🔄 New game</button>`:``}
+  <img src="${src}" />
+       <h1>${state}</h1>
+  </div>`;
+  modal1.innerHTML= '';
+  modal1.insertAdjacentHTML("afterbegin" , markUp);
+
+  modal1.classList.remove('hidden');
+
+  overlay.classList.remove('hidden');
+
+  document.getElementById("btn").addEventListener('click',()=>{
+cb();
+modal1.classList.add('hidden');
+overlay.classList.add('hidden');
+
+  })
+document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`;
 }
   function draw(Mainplayers ){
     players  = Mainplayers;
@@ -95,5 +156,21 @@ document.querySelector(".reload").addEventListener("click" , ()=>{
     document.querySelector(".btne--roll").addEventListener("click" ,click);
     document.querySelector(".btne--hold").addEventListener("click",Hold);
     sidebar.classList.remove("show-sidebar");
+    // modal1.classList.add('hidden');
+    // overlay.classList.add('hidden');
+//  console.log(players);
+  }
+
+  function newGame(Mainplayers ){
+    players  = Mainplayers;
+
+    console.log(players);
+    document.querySelector("main").innerHTML = "";
+    document.querySelector("main").insertAdjacentHTML("afterbegin" , setMain(players , player ));
+    document.querySelector(".btne--roll").addEventListener("click" ,click);
+    document.querySelector(".btne--hold").addEventListener("click",Hold);
+    sidebar.classList.remove("show-sidebar");
+    modal1.classList.add('hidden');
+    overlay.classList.add('hidden');
 //  console.log(players);
   }

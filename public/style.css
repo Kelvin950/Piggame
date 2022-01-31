@@ -374,12 +374,13 @@ main {
    box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   overflow: hidden;
      transition: var(--transition);
+     z-index: 2000;
 }
 
 .invitations h3{
 
   font-size: 1.6rem;
-z-index: 100;
+z-index: 2000;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-align: center;
 position: relative;
@@ -478,12 +479,14 @@ margin-left: -3px;
   padding: 5rem 6rem;
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   z-index: 1000;
+  background: transparent;
+  overflow: hidden;
   transition: all 0.5s;
   border-radius: 5px;
   font-size: 2rem;
-  overflow-y:scroll ;
-  height: 80%;
-  background:whitesmoke;
+color: black;
+  height: auto;
+
   transition: all .2s ease-in;
 }
 .overlay{
@@ -502,3 +505,14 @@ z-index: 100;
 transition: all 0.5s;
 
 }
+
+.memoji{
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.memoji:hover{
+  transform: scale(1.2);
+}
+
