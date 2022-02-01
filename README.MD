@@ -2,4 +2,4 @@ After completing a javascript course on udemy I  went through socket.io docs to 
 Below are some screenshot.
 
 
-<img src='/public/img/Screenshot (125).png' width="1000" height="700">
+<img src='/public/img/Screenshot (125).png' width="1000" height="1000">
