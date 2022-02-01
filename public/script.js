@@ -39,7 +39,7 @@ if(memoji){
   document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`
 }
 
-console.log(username);
+// console.log(username);
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 const switchPlayer = function () {
@@ -52,7 +52,7 @@ const switchPlayer = function () {
 
   function setMain(players ,player  ){
 
-  console.log(players);
+  // console.log(players);
 
     return `
      
@@ -101,7 +101,8 @@ document.querySelector(".reload").addEventListener("click" , ()=>{
 }
 
 function showMemoji(){
-  const markUp =  `<img src="img/IMG_0536.PNG" class="memoji"  width="100px"/>
+  const markUp =  `<h1>Choose your avatar.</h1>
+  <img src="img/IMG_0536.PNG" class="memoji"  width="100px"/>
   <img src="img/IMG_0539.PNG"  class="memoji" width="100px"/>
   <img src="img/IMG_0543.PNG"   class="memoji" width="100px"/>
   <img src="img/IMG_0546.PNG"  class="memoji" width="100px"/>
@@ -117,7 +118,7 @@ function showMemoji(){
       memoji =  img.src.substr(index);
       modal1.classList.add('hidden');
       overlay.classList.add('hidden');
-      console.log(2);
+      // console.log(2);
      localStorage.setItem("memoji" ,memoji);
      
 document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memoji}" class="memoji"  width="100px"/>${username}</h1>`;
@@ -152,7 +153,7 @@ document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memo
   function draw(Mainplayers ){
     players  = Mainplayers;
 
-    console.log(players);
+    // console.log(players);
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").insertAdjacentHTML("afterbegin" , setMain(players , player ));
     document.querySelector(".btne--roll").addEventListener("click" ,click);
@@ -166,7 +167,7 @@ document.querySelector(".sidebar-header").innerHTML =  `<h1><img src="img/${memo
   function newGame(Mainplayers ){
     players  = Mainplayers;
 
-    console.log(players);
+    // console.log(players);
     document.querySelector("main").innerHTML = "";
     document.querySelector("main").insertAdjacentHTML("afterbegin" , setMain(players , player ));
     document.querySelector(".btne--roll").addEventListener("click" ,click);

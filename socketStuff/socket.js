@@ -19,7 +19,7 @@ io.on("connection" , socket=>{
    // console.log(userSocketIdMap.get(username));
  let names =  Array.from(userSocketIdMap.keys());
  let numOfSocketsConnected=  io.engine.clientsCount;
- console.log(numOfSocketsConnected);
+//  console.log(numOfSocketsConnected);
   io.emit("userSconnected" , {
 
     names:names,
@@ -28,7 +28,7 @@ io.on("connection" , socket=>{
   });
 
   
-console.log(players);
+// console.log(players);
 // let dice = 5 ;
 // let score =6
 // let room =  "";
@@ -39,7 +39,7 @@ socket.on("invite" ,(data,cb)=>{
    
 
   const socketid= Array.from(userSocketIdMap.get(data.name));
-console.log(socketid);
+// console.log(socketid);
 const player = players.find(p=>p.name === username);
 // console.log(player ,"player");
 
@@ -77,7 +77,7 @@ players.push(firstPlayer);
 socket.emit("gamePlayer" , {
    data:firstPlayer
 });
-console.log(players);
+// console.log(players);
 // gamePlayer.room =  `${socket.id}${socketid[0]}`;
 
 
@@ -115,7 +115,7 @@ socket.join(secondPlayer.getRoom());
 socket.emit("gamePlayer" , {
    data:secondPlayer
 })
-console.log(players);
+// console.log(players);
 // io.to(secondPlayer.getRoom()).emit("changeLocation" , {
 //    players:playersInRoom(secondPlayer.getRoom()), 
 
@@ -152,7 +152,7 @@ socket.on("declined" , (data)=>{
 })
 
 socket.on("joinedGame" ,({room})=>{
-   console.log(room);
+   // console.log(room);
   const isPlayerInRoom = playersInRoom(room).find(player=>player.getName()===username);
   if(!isPlayerInRoom){
      return socket.emit("NotInARoom" , "not in a room");
@@ -164,7 +164,7 @@ socket.on("joinedGame" ,({room})=>{
    playersInRoom(room).forEach(player1=>{
       player1.gameStarted= false;
    });
-   console.log(playersInRoom(room));
+   // console.log(playersInRoom(room));
    io.to(room).emit("drawGame" , {
          players:playersInRoom(room)
    });
@@ -176,7 +176,7 @@ socket.on("roll" , (data,cb)=>{
  const {player,room} =  data;
    
  
-   console.log(room);
+   // console.log(room);
  
    const playersIntheRoom=  playersInRoom(room)
    playersIntheRoom.forEach(player=>{
@@ -191,21 +191,21 @@ socket.on("roll" , (data,cb)=>{
    //    })
    //       console.log(gPlayer.getScore(),"platerer");
    //   }
-   console.log(playersIntheRoom);
-   console.log(player);
+   // console.log(playersIntheRoom);
+   // console.log(player);
     newDice.generateRandomNumber();
     let dice =  newDice.getDice();
      newDice.setSrc();
      let diceSrc =  newDice.getSrc();
        
         gPlayer.currentScore += dice;
-        console.log(gPlayer ,1);
-        console.log(dice);
+      //   console.log(gPlayer ,1);
+      //   console.log(dice);
           if(dice ===1){
 
             switchPlayer(playersIntheRoom);
           
-            console.log(playersIntheRoom,21);
+            // console.log(playersIntheRoom,21);
             io.to(room).emit("switch" , {
                players: playersIntheRoom,
                // currentPlayer: players.find(player=>player.name === username),
@@ -268,26 +268,44 @@ socket.on("messageSent"  , (data ,cb)=>{
   })
 socket.on("disconnect" , ()=>{
 
-   console.log(players , 1);
+   // console.log(players , 1);
    const player = players.find(p=>p.name === username);
    
-    if(!player)return;
+    if(!player){
+      removeClientFromMap(socket.id , username , userSocketIdMap);
+   
+      let names =  Array.from(userSocketIdMap.keys());
+      // console.log(Array.from(userSocketIdMap.keys()));
+      let numOfSocketsConnected=  io.engine.clientsCount;
+      // console.log(numOfSocketsConnected);
+      // console.log(names , numOfSocketsConnected);
+      // console.log("a user left");
+      // console.log(io.engine.clientsCount);
+      io.emit("userSconnected" , {
+   
+         names:names,
+         usersOline:numOfSocketsConnected,
+         players:players|| [],
+       });
+     
+return;
+    };
    // if(player.gameStarted){
         const index =  players.findIndex(p=>p.name ===player.name);
       players.splice(index,1);
-          console.log(player,13);
+         //  console.log(player,13);
       leaveRoom(player.room ,username);
 
-      console.log(players ,1221);
+      // console.log(players ,1221);
       
       io.to(player.room).emit("playerLeft" , {player:player , data:`${username} disconnected`});
    // }
-        
    removeClientFromMap(socket.id , username , userSocketIdMap);
    
    let names =  Array.from(userSocketIdMap.keys());
+   // console.log(Array.from(userSocketIdMap.keys()));
    let numOfSocketsConnected=  io.engine.clientsCount;
-   console.log(numOfSocketsConnected);
+   // console.log(numOfSocketsConnected);
    // console.log(names , numOfSocketsConnected);
    // console.log("a user left");
    // console.log(io.engine.clientsCount);
@@ -298,6 +316,7 @@ socket.on("disconnect" , ()=>{
       players:players|| [],
     });
   
+   
 })
 })
 

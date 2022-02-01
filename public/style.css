@@ -294,7 +294,9 @@ main {
   justify-self: center;
   height: 40px;
 }
-
+.links{
+  overflow: auto;
+}
 .links li {
   display: block;
 

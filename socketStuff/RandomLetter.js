@@ -37,7 +37,7 @@ exports.switchPlayer = ( players)=>{
   
       currentPlayer.currentPlayer =  false ; 
          otherPlayer.currentPlayer =  true;
-console.log(players);
+// console.log(players);
       
   
 
@@ -47,7 +47,7 @@ console.log(players);
 exports.hold =  (players,cb)=>{
 
     let currentPlayer  = players.find(player => player.currentPlayer === true) ; 
-    console.log(currentPlayer);
+    // console.log(currentPlayer);
     let  otherPlayer =  players.find(player => player.currentPlayer !== true);
    
     currentPlayer.setScore();
@@ -58,7 +58,7 @@ exports.hold =  (players,cb)=>{
     }
       currentPlayer.currentPlayer =  false ; 
          otherPlayer.currentPlayer =  true;
-console.log(players);
+// console.log(players);
 }
 
 
@@ -74,7 +74,7 @@ exports.addUserIntoARoom = (player1 ,player2)=>{
 
 }
 exports.outputRoom= ()=>{
-    console.log(Rooms);
+    // console.log(Rooms);
 }
 exports.setPlayer1ToCurrentPlayer = (player1)=>{
 

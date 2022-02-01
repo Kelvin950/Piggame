@@ -13,7 +13,7 @@ let userID ;
 
 
 socket.on("hasJoined" , (data)=>{
-    console.log(data);
+    // console.log(data);
 })
 
 
@@ -29,10 +29,10 @@ socket.on("hasJoined" , (data)=>{
 socket.on("userSconnected" ,data=>{
 
     
-    console.log(data.names);
+    // console.log(data.names);
    let {names} =  data
    names =  names.filter(name=>name !== username)
-   console.log(names);
+//    console.log(names);
 ul.innerHTML =  ""
      const html =  names.map(name =>{
          return `    <li >
@@ -61,13 +61,13 @@ ul.innerHTML =  ""
     
        
         if(!e.target.classList.contains("li"))return;
-        console.log(e.target.innerHTML);
+        // console.log(e.target.innerHTML);
     //    console.log(e.target.srcElement);
         socket.emit("invite" , {
             name:e.target.innerHTML,
             sender:username
         } , (msg)=>{
-            console.log(msg);
+            // console.log(msg);
             if(msg){
               return markUp(msg);
             }
@@ -87,7 +87,7 @@ ul.innerHTML =  ""
 socket.on("invitation" ,data=>{
    
   
-    console.log(data);
+    // console.log(data);
 
     const html = `<div><p>${data.from.sender} : ${data.message}</p> <button class="btn btn-primary accept">Accept</button> <button class="btn btn-danger decline">Cancel</button></div>`;
     notification.innerHTML =  "";
@@ -129,7 +129,7 @@ notification.innerHTML =  "";
 //        }
     
    socket.on("declined" , (data)=>{
-       console.log(data);
+    //    console.log(data);
 
        return markUp(data);
 
@@ -173,14 +173,14 @@ notification.innerHTML =  "";
 // document.addEventListener("")
 
 socket.on("hello" , data=>{
-    console.log(data);
+    // console.log(data);
 })
 
 
 function click(e){
    
-    console.log(e.target);
-     console.log(player);
+    // console.log(e.target);
+    //  console.log(player);
         socket.emit("roll" ,{
             player:player ,
             room: player.room}
@@ -194,8 +194,8 @@ function click(e){
 
     function Hold(e){
         
-        console.log(e.target);
-        console.log(player);
+        // console.log(e.target);
+        // console.log(player);
         socket.emit("hold" , {
             player:player,
             room:player.room
@@ -205,9 +205,9 @@ function click(e){
 
     socket.on("hold" , data=>{
         
-        console.log(data);
+        // console.log(data);
         player =  data.players.find(player=>player.name === username);
-        console.log(player);
+        // console.log(player);
         // console.log(data.username);
        
         draw(data.players);
@@ -215,8 +215,8 @@ function click(e){
 
 socket.on("roll" , data=>{
 
-    console.log(player);
-    console.log(data);
+    // console.log(player);
+    // console.log(data);
     // console.log(UserScore);
    
 document.querySelector(".dice").src=  `img/${data.diceSrc}`
@@ -244,26 +244,26 @@ document.getElementById(`current--${players.findIndex(player=>player.currentPlay
 // })
 
 socket.on("gamePlayer" , (data)=>{
-    console.log(data);
+    // console.log(data);
     player = data.data ; 
-    console.log(player);
+    // console.log(player);
     UserScore=document.getElementById(`#name--${player.name}`);
 })
 
 socket.on("switch" , data=>{
-    console.log(data);
+    // console.log(data);
     player =  data.players.find(player=>player.name === username);
-    console.log(player);
-    console.log(data.username);
+    // console.log(player);
+    // console.log(data.username);
     draw(data.players);
 
 })
 socket.on("drawGame" , data=>{
-                console.log(data);
+                // console.log(data);
                 players = data.players;
-                      console.log(player);
+                    //   console.log(player);
                 draw(players)
-                console.log(players);
+                // console.log(players);
             })
 
 // socket.on("usersConnected" , data=>{
@@ -272,12 +272,12 @@ socket.on("drawGame" , data=>{
 
 
 socket.on("playerLeft" , (data)=>{
-    console.log(data ,'playerleft');
+    // console.log(data ,'playerleft');
   showModal(data.data)
 });
 
 socket.on("NotInARoom" , data=>{
-    console.log(data);
+    // console.log(data);
 })
 
 
@@ -288,7 +288,7 @@ const message = document.querySelector("input").value ;
 if(message === ""){
     return; 
 }
-console.log(message);
+// console.log(message);
  socket.emit("messageSent" , {
      from:username ,
      message:message,
@@ -301,48 +301,48 @@ console.log(message);
 })
 
 socket.on("message" ,data=>{
-    console.log(data);
+    // console.log(data);
 const messages  =  `<li><p>${data.from}: ${data.message}</p></li>`;
 chatUl.innerHTML +=messages;
 sound('./sounds/mixkit-message-pop-alert-2354.mp3');
 })
 
 socket.on("playerWon" ,(data)=>{
-    console.log(data);
+    // console.log(data);
     const player =  data.players.find(p=>p.name === username);
-    console.log(player);
+    // console.log(player);
    if(player.score >=100){
        const index = memoji.indexOf('0');
        let str = memoji.substr(index ,4);
         str=  +str + 1;
           showEnd(`img/IMG_0${str}.PNG` , "You won" , ()=>{
-              console.log(str);
+            //   console.log(str);
               socket.emit("newGame" , {
                 room:player.room,
                 name:username
               })
           })
           sound('./sounds/mixkit-male-voice-cheer-2010.mp3')
-       console.log("You won");
+    //    console.log("You won");
    }
    else{
     const index = memoji.indexOf('0');
     let str = memoji.substr(index ,4);
      str=  +str + 2;
      showEnd(`img/IMG_0${str}.PNG` , "You lost" , ()=>{
-        console.log(str);
+        // console.log(str);
     })
     sound('./sounds/mixkit-quick-win-video-game-notification-269.mp3')
-       console.log("player lost");
+    //    console.log("player lost");
    }
    
-    console.log("ddff");
+    // console.log("ddff");
 })
 
 socket.on("newGame" , data=>{
-    console.log(data);
+    // console.log(data);
     players = data.players;
-          console.log(player);
+        //   console.log(player);
     newGame(players)
-    console.log(players);
+    // console.log(players);
 })

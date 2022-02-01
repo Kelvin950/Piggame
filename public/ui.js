@@ -43,7 +43,7 @@ overlay.addEventListener("click" , ()=>{
 howButton.addEventListener("click" , ()=>{
     modal.classList.remove("hidden");
      overlay.classList.remove("hidden");
-     console.log("fdr");
+     // console.log("fdr");
 })
 
 
