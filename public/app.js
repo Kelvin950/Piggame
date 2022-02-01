@@ -120,7 +120,7 @@ notification.innerHTML =  "";
     socket.emit("joined" , {id:data.from.id ,sender:data.from.sender})
     })
 
-    sound('./sounds/mixkit-software-interface-start-2574.wav');
+    sound('./sounds/mixkit-software-interface-start-2574.mp3');
 })
 // invitationUl.addEventListener("click" , (e)=>{
 //     if(e.target.classList.contains(`${data.from.sender}`)){
@@ -322,7 +322,7 @@ socket.on("playerWon" ,(data)=>{
                 name:username
               })
           })
-          sound('./sounds/mixkit-male-voice-cheer-2010.wav')
+          sound('./sounds/mixkit-male-voice-cheer-2010.mp3')
        console.log("You won");
    }
    else{
@@ -332,7 +332,7 @@ socket.on("playerWon" ,(data)=>{
      showEnd(`img/IMG_0${str}.PNG` , "You lost" , ()=>{
         console.log(str);
     })
-    sound('./sounds/mixkit-quick-win-video-game-notification-269.wav')
+    sound('./sounds/mixkit-quick-win-video-game-notification-269.mp3')
        console.log("player lost");
    }
    
